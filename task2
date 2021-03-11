@@ -1,0 +1,10 @@
+x=float(input("Ввведите число 1:  "))
+y=float(input("Ввведите число 2:  "))
+z=float(input("Ввведите число 3:  "))
+if (x < y) and (x < z):
+    print(x, "наименьшее число")
+else:
+    if (y < x) and (y < z):
+        print(y, "наименьшее число")
+    else:
+        print(z, "наименьшее число")
