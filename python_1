@@ -1,0 +1,21 @@
+import random
+x=20  #количество рандомных чисел
+y=[]  #первый лист
+z=[]  #второй лист
+f= int(input("Enter number: "))   #ввод числа
+for i in range(x):   #функция рандома
+     a=random.randint(0,100)    #присвоить а рандомное число
+     y.append(a)                #запись в лист Y 
+def matan(y,f):                #функция матан берущая 2 исходных значения
+     b=min(y)
+     print("Min", b)
+     c=max(y)
+     print("Max", c)
+     for i in y:                 #от 1 числа в списке Y
+          if i % f ==0:          #если число из списка делится без остатка 
+               z.append(i)       #запись числа в список Z
+     print(z)
+matan(y,f)         #запуск функции 
+     
+          
+          
