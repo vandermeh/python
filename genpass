@@ -1,0 +1,103 @@
+#!/usr/bin/python
+#-*-coding:utf8;-*-
+import random, time, os,string
+chars = string.letters + "1234567890"
+
+lmax = 10 # макс длинна
+lmin = 8 # мин длинна
+count = 500000 # k0личество
+f = "$HOME/wordlists.txt" # файл
+
+def gen(f, count, lengthmin, lengthmax):
+   f = open(f, "a")
+   i = 0
+   lasti = 0
+   word = ''
+   while i != count:
+      word = ''.join(random.sample(chars, random.randint(lengthmin, lengthmax)))
+      word = word + "\n"
+      if i - lasti == 1024:
+         f.write(word )
+         word = ''
+         print "Done " + str(i)
+         lasti = i
+      i = i + 1
+   print "Done!"
+   f.close()
+   
+def gendata(f, count, lengthmin, lengthmax):
+   f = open(f, "a")
+   i = 0
+   lasti = 0
+   word = ''
+   while i != count:
+      day = random.randint(1,31)
+      month = random.randint(1,12)
+      year = random.randint(1980,2016)
+      if day < 10:
+         day = "0" + str(day)
+      if month < 10:
+         month = "0" + str(month)
+      word = word+str(day)+'.'+str(month)+'.'+str(year)+"\n"
+      if i - lasti == 1024:
+         f.write(word )
+         word = ''
+         print "Done " + str(i)
+         lasti = i
+      i = i + 1
+   print "Done!"
+   f.close()
+   
+def date(f, count, lengthmin, lengthmax):
+   f = open(f, "a")
+   i = 1
+   lasti = 0
+   day = 1
+   strday = ''
+   month = 1
+   strmonth = ''
+   year = 1970
+   stryear = ''
+   word = ''
+   while i != count:
+      # counters
+      if day == 31:
+         day = 1
+         month = month + 1
+      if month == 12:
+         month = 1
+         year = year + 1
+         
+      if day < 10:
+         strday = "0" + str(day)
+      else:
+         strday = str(day)
+      if month < 10:
+         strmonth = "0" + str(month)
+      else:
+         strmonth = str(month)
+      stryear = str(year)
+      word = word+strday+'.'+strmonth+'.'+stryear+"\n"
+      if i - lasti == 1024:
+         f.write(word )
+         word = ''
+         print "Done " + str(i) + " Day: "+str(day)
+         lasti = i
+      i = i + 1
+      day = day + 1
+   print "Done!"
+   f.close()     
+
+#####
+#Раскоментируйте функции, которые #нужны или все сразу.
+
+#date(f, count, lmin, lmax) #Даты с 1970
+#года
+
+#gendata(f, count, lmin, lmax)  #Рандомные даты
+
+gen(f, count, lmin, lmax) # Рандомные #числа
+####
+
+# Очишаем словарь
+os.system("cat " + f + "| uniq > " + f)
